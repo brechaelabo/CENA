@@ -1,0 +1,107 @@
+flowchart TB
+    %% Main user types
+    Admin[Admin]
+    Actor[Actor]
+    Tutor[Tutor]
+
+    %% Landing & Authentication
+    LandingPage[Landing Page]
+    Signup[Signup/Payment]
+    Authentication[Authentication System\nClerk]
+    
+    %% Phase 0: Admin Theme Configuration
+    ThemeConfig[Theme Configuration]
+    MonologueUpload[Monologue Upload]
+    
+    %% Phase 1: Actor Submission
+    ThemePage[Theme Page]
+    SubmissionForm[Submission Form]
+    
+    %% Phase 2: Tutor Review
+    TutorDashboard[Tutor Dashboard]
+    FeedbackForm[Feedback Form]
+    
+    %% Phase 3: Actor Feedback
+    FeedbackPage[Feedback Page]
+    BookingLink[WhatsApp Booking]
+    
+    %% Database Models
+    UserModel[(User DB)]
+    ThemeModel[(Theme DB)]
+    MonologueModel[(Monologue DB)]
+    SubmissionModel[(Submission DB)]
+    FeedbackModel[(Feedback DB)]
+    AssignmentModel[(Assignment DB)]
+    PlanModel[(Plan DB)]
+    SubscriptionModel[(Subscription DB)]
+
+    %% Flow relationships
+    LandingPage -->|Sign Up| Signup
+    Signup -->|Creates| UserModel
+    Signup -->|Creates| SubscriptionModel
+    Signup -->|Uses| PlanModel
+    Signup -->|Authenticates| Authentication
+    
+    %% Admin flows
+    Admin -->|Authenticates| Authentication
+    Authentication -->|Role=ADMIN| ThemeConfig
+    ThemeConfig -->|Creates| ThemeModel
+    ThemeConfig -->|Adds| MonologueUpload
+    MonologueUpload -->|Creates| MonologueModel
+    Admin -->|Assigns Actors to Tutors| AssignmentModel
+    
+    %% Actor flows
+    Actor -->|Authenticates| Authentication
+    Authentication -->|Role=ACTOR| ThemePage
+    ThemePage -->|Views| ThemeModel
+    ThemePage -->|Downloads| MonologueModel
+    ThemePage -->|Submits Video| SubmissionForm
+    SubmissionForm -->|Creates| SubmissionModel
+    Actor -->|Receives Notification| FeedbackPage
+    FeedbackPage -->|Views| FeedbackModel
+    FeedbackPage -->|Books Session| BookingLink
+    
+    %% Tutor flows
+    Tutor -->|Authenticates| Authentication
+    Authentication -->|Role=TUTOR| TutorDashboard
+    TutorDashboard -->|Views Assignments| AssignmentModel
+    TutorDashboard -->|Views Submissions| SubmissionModel
+    TutorDashboard -->|Creates Feedback| FeedbackForm
+    FeedbackForm -->|Creates| FeedbackModel
+    
+    %% Database relationships
+    UserModel -->|has| SubmissionModel
+    UserModel -->|has| FeedbackModel
+    UserModel -->|has| AssignmentModel
+    UserModel -->|has| SubscriptionModel
+    ThemeModel -->|has| MonologueModel
+    ThemeModel -->|has| SubmissionModel
+    ThemeModel -->|has| AssignmentModel
+    SubmissionModel -->|has| FeedbackModel
+    PlanModel -->|has| SubscriptionModel
+    
+    %% Phase labels
+    subgraph "Phase 0: Admin Theme Configuration"
+        ThemeConfig
+        MonologueUpload
+    end
+    
+    subgraph "Phase 1: Actor Submission"
+        ThemePage
+        SubmissionForm
+    end
+    
+    subgraph "Phase 2: Tutor Review"
+        TutorDashboard
+        FeedbackForm
+    end
+    
+    subgraph "Phase 3: Actor Feedback & Booking"
+        FeedbackPage
+        BookingLink
+    end
+    
+    style Phase-0 fill:#f9f,stroke:#333,stroke-width:2px
+    style Phase-1 fill:#bbf,stroke:#333,stroke-width:2px
+    style Phase-2 fill:#bfb,stroke:#333,stroke-width:2px
+    style Phase-3 fill:#fbf,stroke:#333,stroke-width:2px

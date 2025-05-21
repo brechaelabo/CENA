@@ -1,0 +1,16 @@
+# --- essenciais para projetos Next.js / Replit ---
+node_modules/
+.next/
+out/
+.env*
+.replit
+*.log
+# arquivos grandes auxiliares
+*.zip
+*.png
+*.jpg
+*.jpeg
+*.mp4
+*.mov
+*.pdf
+# -------------------------------------------------

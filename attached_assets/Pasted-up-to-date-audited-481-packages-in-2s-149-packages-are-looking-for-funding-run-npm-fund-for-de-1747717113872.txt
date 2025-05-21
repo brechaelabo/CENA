@@ -1,0 +1,73 @@
+up to date, audited 481 packages in 2s
+
+149 packages are looking for funding
+  run `npm fund` for details
+
+3 vulnerabilities (2 moderate, 1 high)
+
+To address all issues, run:
+  npm audit fix
+
+Run `npm audit` for details.
+
+> template@0.1.0 dev
+> next dev -H 0.0.0.0 -p 3000
+
+   ▲ Next.js 15.3.2
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ⚠ Invalid next.config.mjs options detected: 
+ ⚠     Unrecognized key(s) in object: 'swcMinify'
+ ⚠ See more info here: https://nextjs.org/docs/messages/invalid-next-config
+ ✓ Ready in 1931ms
+ ✓ Compiled /middleware in 267ms
+ ✓ Compiled (224 modules)
+ ○ Compiling / ...
+<w> [webpack.cache.PackFileCacheStrategy] Serializing big strings (120kiB) impacts deserialization performance (consider using Buffer instead and decode when needed)
+ ✓ Compiled / in 8.8s (1239 modules)
+ GET / 200 in 9425ms
+ ✓ Compiled in 790ms (498 modules)
+ ○ Compiling /favicon.ico ...
+ ✓ Compiled /favicon.ico in 3.1s (757 modules)
+ GET /favicon.ico 200 in 3238ms
+ ○ Compiling /dashboard ...
+ ⨯ ./app/dashboard/page-client.tsx:7:1
+Module not found: Can't resolve '@stackframe/stack'
+   5 | import { Input } from "@/components/ui/input";
+   6 | import { Label } from "@radix-ui/react-label";
+>  7 | import { useUser } from "@stackframe/stack";
+     | ^
+   8 | import { useRouter } from "next/navigation";
+   9 |
+  10 | export function PageClient() {
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./app/dashboard/page-client.tsx:7:1
+Module not found: Can't resolve '@stackframe/stack'
+   5 | import { Input } from "@/components/ui/input";
+   6 | import { Label } from "@radix-ui/react-label";
+>  7 | import { useUser } from "@stackframe/stack";
+     | ^
+   8 | import { useRouter } from "next/navigation";
+   9 |
+  10 | export function PageClient() {
+
+https://nextjs.org/docs/messages/module-not-found
+ ⨯ ./app/dashboard/page-client.tsx:7:1
+Module not found: Can't resolve '@stackframe/stack'
+   5 | import { Input } from "@/components/ui/input";
+   6 | import { Label } from "@radix-ui/react-label";
+>  7 | import { useUser } from "@stackframe/stack";
+     | ^
+   8 | import { useRouter } from "next/navigation";
+   9 |
+  10 | export function PageClient() {
+
+https://nextjs.org/docs/messages/module-not-found
+ GET /dashboard 500 in 7122ms
+ GET /dashboard 500 in 14ms
+ GET /dashboard 500 in 30ms
+ GET /dashboard 500 in 21ms

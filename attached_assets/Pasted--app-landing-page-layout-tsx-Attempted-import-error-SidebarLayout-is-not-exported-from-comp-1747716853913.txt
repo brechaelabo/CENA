@@ -1,0 +1,44 @@
+./app/(landing-page)/layout.tsx
+Attempted import error: 'SidebarLayout' is not exported from '@/components/sidebar-layout' (imported as 'SidebarLayout').
+
+Import trace for requested module:
+./app/(landing-page)/layout.tsx
+
+./app/(landing-page)/layout.tsx
+Attempted import error: 'ColorModeSwitch' is not exported from '@/components/color-mode-switcher' (imported as 'ColorModeSwitch').
+
+Import trace for requested module:
+./app/(landing-page)/layout.tsx
+ ⨯ TypeError: (0 , react__WEBPACK_IMPORTED_MODULE_0__.createContext) is not a function
+    at __webpack_require__ (.next/server/webpack-runtime.js:33:42)
+    at eval (webpack-internal:///(rsc)/./app/(landing-page)/layout.tsx:9:69)
+    at <unknown> (rsc)/./app/(landing-page)/layout.tsx (/home/runner/workspace/.next/server/app/(landing-page)/page.js:33:1)
+    at Function.__webpack_require__ (.next/server/webpack-runtime.js:33:42) {
+  page: '/'
+}
+ ⚠ ./components/sidebar-layout.tsx
+Attempted import error: 'getMenuItems' is not exported from './sidebar-menu-items' (imported as 'getMenuItems').
+
+Import trace for requested module:
+./components/sidebar-layout.tsx
+
+./components/sidebar-layout.tsx
+Attempted import error: 'getMenuItems' is not exported from './sidebar-menu-items' (imported as 'getMenuItems').
+
+Import trace for requested module:
+./components/sidebar-layout.tsx
+
+./app/(landing-page)/layout.tsx
+Attempted import error: 'SidebarLayout' is not exported from '@/components/sidebar-layout' (imported as 'SidebarLayout').
+
+Import trace for requested module:
+./app/(landing-page)/layout.tsx
+
+./app/(landing-page)/layout.tsx
+Attempted import error: 'ColorModeSwitch' is not exported from '@/components/color-mode-switcher' (imported as 'ColorModeSwitch').
+
+Import trace for requested module:
+./app/(landing-page)/layout.tsx
+ GET / 500 in 18473ms
+ ⚠ Blocked cross-origin request from 28c30371-4b63-409a-ba1b-6b8598b6751c-00-31skkb4u0i5t.picard.replit.dev to /_next/* resource. To allow this, configure "allowedDevOrigins" in next.config
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
