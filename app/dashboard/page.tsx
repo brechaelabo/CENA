@@ -1,30 +1,26 @@
+// app/dashboard/page.tsx
 "use client";
 import { useUser } from "@clerk/nextjs";
-import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function DashboardRedirect() {
-  const { user, isSignedIn, isLoaded } = useUser();
+  const { user, isLoaded } = useUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!isLoaded) return;
-    if (!isSignedIn) {
-      router.replace("/");
-      return;
+    if (isLoaded && user) {
+      const role = user.publicMetadata?.role;
+      if (role === "ADMIN") router.replace("/admin");
+      else if (role === "TUTOR") router.replace("/tutor");
+      else if (role === "ATOR") router.replace("/ator");
+      // ...etc.
     }
-    // Assume roles are in user.publicMetadata.role (string or array)
-    const roles = user.publicMetadata.role || [];
-    if (roles.includes("admin")) router.replace("/admin");
-    else if (roles.includes("tutor")) router.replace("/tutor");
-    else if (roles.includes("ator")) router.replace("/ator");
-    else if (roles.includes("convidado")) router.replace("/convidado");
-    else router.replace("/perfil"); // fallback profile page
-  }, [user, isSignedIn, isLoaded, router]);
+  }, [user, isLoaded, router]);
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <span>Carregando...</span>
+    <div className="flex items-center justify-center min-h-screen">
+      <span className="text-lg">Carregando...</span>
     </div>
   );
 }

@@ -1,83 +1,68 @@
-
 "use client";
-
-import { UserButton } from "@clerk/nextjs";
+import { useState } from "react";
 import Link from "next/link";
-import { useUser } from "@clerk/nextjs";
-import { cn } from "@/lib/utils";
+import { UserButton, useUser } from "@clerk/nextjs";
 
-interface SidebarProps {
-  menuItems: Array<{
-    title: string;
-    href: string;
-    icon?: React.ComponentType<{ className?: string }>;
-  }>;
+export default function Sidebar({
+  menuItems,
+  open,
+  onOpenChange,
+  currentPath,
+}: {
+  menuItems: Array<{ href: string; title: string }>;
   open: boolean;
   onOpenChange: (open: boolean) => void;
   currentPath: string;
-}
-
-export default function Sidebar({ menuItems, open, onOpenChange, currentPath }: SidebarProps) {
+}) {
   const { user } = useUser();
 
   return (
     <>
+      {/* Botão hamburger para mobile */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 p-2 rounded-md bg-background border"
+        className="md:hidden fixed top-4 left-4 z-50 bg-muted p-2 rounded"
         onClick={() => onOpenChange(!open)}
+        aria-label="Abrir menu"
       >
-        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+        <svg className="h-6 w-6" fill="none" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M4 6h16M4 12h16M4 18h16"
+          />
         </svg>
       </button>
-
-      <div 
-        className={cn(
-          "fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden",
-          open ? "block" : "hidden"
-        )}
-        onClick={() => onOpenChange(false)}
-      />
-
       <aside
-        className={cn(
-          "fixed inset-y-0 left-0 z-40 w-64 bg-background border-r transform transition-transform duration-200 ease-in-out md:translate-x-0 md:static",
+        className={`fixed inset-y-0 left-0 w-64 bg-muted border-r z-40 transform ${
           open ? "translate-x-0" : "-translate-x-full"
-        )}
+        } transition-transform duration-300 md:translate-x-0 md:static md:block`}
+        onClick={() => onOpenChange(false)}
       >
-        <div className="p-4 border-b">
-          <div className="flex items-center gap-3">
-            {user?.imageUrl && (
-              <img src={user.imageUrl} alt={user.fullName || ''} className="h-10 w-10 rounded-full" />
-            )}
-            <div className="flex flex-col">
-              <span className="font-semibold">{user?.firstName}</span>
-              <span className="text-xs text-muted-foreground">{user?.emailAddresses[0]?.emailAddress}</span>
-            </div>
+        <div className="p-4 border-b flex items-center gap-2">
+          {user?.imageUrl && (
+            <img src={user.imageUrl} className="h-10 w-10 rounded-full" />
+          )}
+          <div>
+            <div className="font-bold">{user?.firstName}</div>
+            <div className="text-xs">{user?.publicMetadata?.role}</div>
+            <div className="text-xs">{user?.publicMetadata?.plan}</div>
           </div>
         </div>
-
-        <nav className="space-y-1 p-4">
+        <nav className="flex flex-col p-4 gap-2">
           {menuItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
-              className={cn(
-                "flex items-center px-3 py-2 text-sm rounded-md gap-3 transition-colors",
-                currentPath === item.href 
-                  ? "bg-accent text-accent-foreground" 
-                  : "hover:bg-accent/50"
-              )}
+              className={`rounded px-2 py-2 hover:bg-accent ${item.href === currentPath ? "bg-accent" : ""}`}
             >
-              {item.icon && <item.icon className="h-4 w-4" />}
               {item.title}
             </Link>
           ))}
+          <div className="mt-4">
+            <UserButton afterSignOutUrl="/" />
+          </div>
         </nav>
-
-        <div className="absolute bottom-4 left-4">
-          <UserButton afterSignOutUrl="/" />
-        </div>
       </aside>
     </>
   );

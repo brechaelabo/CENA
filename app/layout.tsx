@@ -1,7 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import React from "react";
-import Provider from "./provider";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   title: "CENA Self-tape Club",
@@ -16,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        <Provider>{children}</Provider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

@@ -1,5 +1,11 @@
-
-import { LayoutDashboard, Calendar, Video, Users, UserCircle, Settings } from "lucide-react";
+import {
+  LayoutDashboard,
+  Calendar,
+  Video,
+  Users,
+  UserCircle,
+  Settings,
+} from "lucide-react";
 
 export const sidebarMenuItems = [
   { title: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -7,5 +13,5 @@ export const sidebarMenuItems = [
   { title: "Meus Selftapes", href: "/selftapes", icon: Video },
   { title: "Mentorias", href: "/mentorias", icon: Users },
   { title: "Perfil", href: "/perfil", icon: UserCircle },
-  { title: "Configurações", href: "/configuracoes", icon: Settings }
+  { title: "Configurações", href: "/configuracoes", icon: Settings },
 ];

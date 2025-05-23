@@ -1,11 +1,9 @@
-
 "use client";
-
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "./ui/button";
 
-export function ColorModeSwitcher() {
+export function ColorModeSwitch() {
   const { setTheme } = useTheme();
 
   return (
@@ -18,7 +16,7 @@ export function ColorModeSwitcher() {
       >
         <Moon />
       </Button>
-      
+
       <Button
         variant="ghost"
         size="icon"
@@ -30,6 +28,3 @@ export function ColorModeSwitcher() {
     </>
   );
 }
-
-// Add default export alias
-export { ColorModeSwitcher as ColorModeSwitch };
